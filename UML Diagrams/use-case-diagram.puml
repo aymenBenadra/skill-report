@@ -1,0 +1,32 @@
+@startuml
+title "Skill Report"
+left to right direction
+actor "Student" as student
+actor "Instructor" as instructor
+
+rectangle "Skill Report" {
+    usecase "Browse students' skill tree" as UC1
+    usecase "Check own skill tree" as UC2
+    usecase "Upgrade/Downgrade own skill level" as UC3
+    usecase "Browse classroom notes and goals" as UC4
+    usecase "Add/remove own notes and goals to/from Classroom board" as UC4
+    usecase "Log in" as UC5
+    usecase "Log out" as UC6
+}
+
+instructor <|-u- student
+
+instructor --> UC1
+instructor --> UC6
+
+student --> UC2
+student --> UC3
+student --> UC4
+
+UC1 --> UC5 : <<include>>
+UC2 --> UC5 : <<include>>
+UC3 --> UC5 : <<include>>
+UC4 --> UC5 : <<include>>
+
+
+@enduml

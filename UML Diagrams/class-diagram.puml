@@ -1,0 +1,58 @@
+@startuml
+' Entities
+class User {
+    - String name
+    - String email
+    - String password
+}
+
+class Instructor extends User {}
+
+class Student extends User {}
+
+class Classroom {
+    - String code
+    - String name
+}
+
+class Reference {
+    - String code
+    - String name
+}
+
+class Skill {
+    - String code
+    - String name
+    - String description
+}
+
+class StudentSkill {
+    - int level
+}
+
+class Note {
+    - String content
+    - NoteType type
+}
+
+enum NoteType {
+    NOTE
+    GOAL
+}
+
+' Entity Relationships
+Instructor "1  " -- "1,*" Classroom : Moderates
+
+Classroom "1" -r- "1,*" Student : "Enrolled  "
+Classroom "1" -- "1,* " Reference : "References  "
+
+Reference "1" -- "1,*" Skill : has
+
+Student "1" -r- "0,*" Note : "Writes   "
+
+Note .. NoteType
+
+Student "0,*" -- "1,*" Skill
+(Student, Skill) .. StudentSkill
+
+@enduml
