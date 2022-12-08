@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -20,6 +21,10 @@ public class Reference {
     private String name;
     @Column(unique = true)
     private String code;
+
+    @OneToMany(mappedBy = "reference", fetch = FetchType.LAZY, cascade = CascadeType.MERGE, orphanRemoval = true)
+    @ToString.Exclude
+    private List<Skill> skills;
 
     @Override
     public boolean equals(Object o) {

@@ -4,14 +4,16 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
 
+import java.util.List;
 import java.util.Objects;
 
-@MappedSuperclass
+@Entity
+@Table(name = "users")
 @Getter
 @Setter
 @ToString
 @RequiredArgsConstructor
-public abstract class User {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,6 +24,21 @@ public abstract class User {
     private String email;
 
     private String password;
+
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
+
+    @OneToMany(mappedBy = "student", fetch = FetchType.LAZY, cascade = CascadeType.MERGE, orphanRemoval = true)
+    @ToString.Exclude
+    private List<StudentSkill> skills;
+
+    @OneToMany(mappedBy = "student", fetch = FetchType.LAZY, cascade = CascadeType.MERGE, orphanRemoval = true)
+    @ToString.Exclude
+    private List<Note> notes;
+
+    @ManyToOne
+    @JoinColumn(name = "classroom_id")
+    private Classroom classroom;
 
     @Override
     public boolean equals(Object o) {

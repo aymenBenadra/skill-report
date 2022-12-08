@@ -24,7 +24,7 @@ public class Note {
 
     @ManyToOne
     @JoinColumn(name = "student_id")
-    private Student student;
+    private User student;
 
     @Override
     public boolean equals(Object o) {

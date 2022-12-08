@@ -26,11 +26,11 @@ public class Classroom {
 
     @ManyToOne
     @JoinColumn(name = "instructor_id")
-    private Instructor instructor;
+    private User instructor;
 
-    @OneToMany(mappedBy = "classroom", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "classroom", fetch = FetchType.LAZY, cascade = CascadeType.MERGE, orphanRemoval = true)
     @ToString.Exclude
-    private List<Student> students;
+    private List<User> students;
 
     @Override
     public boolean equals(Object o) {
