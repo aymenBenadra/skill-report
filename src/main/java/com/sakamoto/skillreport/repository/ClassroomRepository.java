@@ -1,10 +1,8 @@
 package com.sakamoto.skillreport.repository;
 
 import com.sakamoto.skillreport.model.Classroom;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-@Repository
-public interface ClassroomRepository extends CrudRepository<Classroom, Long> {
+public interface ClassroomRepository extends JpaRepository<Classroom, Long> {
     Classroom findByCode(String code);
 }

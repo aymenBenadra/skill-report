@@ -1,10 +1,8 @@
 package com.sakamoto.skillreport.repository;
 
 import com.sakamoto.skillreport.model.Reference;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-@Repository
-public interface ReferenceRepository extends CrudRepository<Reference, Long> {
+public interface ReferenceRepository extends JpaRepository<Reference, Long> {
     Reference findByCode(String code);
 }
