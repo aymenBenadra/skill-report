@@ -11,20 +11,29 @@ import java.util.Objects;
 @Getter
 @Setter
 @ToString
-@AllArgsConstructor
+@RequiredArgsConstructor
 @NoArgsConstructor
 public class Note {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NonNull
     private String content;
 
+    @NonNull
+    @Enumerated(EnumType.STRING)
     private NoteType type;
 
+    @NonNull
     @ManyToOne
-    @JoinColumn(name = "student_id")
+    @JoinColumn(name = "student_id", nullable = false)
     private User student;
+
+    @NonNull
+    @ManyToOne
+    @JoinColumn(name = "classroom_id", nullable = false)
+    private Classroom classroom;
 
     @Override
     public boolean equals(Object o) {

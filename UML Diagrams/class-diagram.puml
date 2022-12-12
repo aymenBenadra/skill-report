@@ -6,10 +6,6 @@ class User {
     - String password
 }
 
-class Instructor extends User {}
-
-class Student extends User {}
-
 class Classroom {
     - String code
     - String name
@@ -35,24 +31,30 @@ class Note {
     - NoteType type
 }
 
+enum UserRole {
+    ROLE_INSTRUCTOR
+    ROLE_STUDENT
+}
+
 enum NoteType {
     NOTE
     GOAL
 }
 
 ' Entity Relationships
-Instructor "1  " -- "1,*" Classroom : Moderates
+User "1  " *-- "1,*" Classroom : Moderates::TEACHER
 
-Classroom "1" -r- "1,*" Student : "Enrolled  "
-Classroom "1" -- "1,* " Reference : "References  "
+Classroom "1" -- "1,*" User : Enrolled::STUDENT
+Classroom "1" -- "1,* " Reference : References
 
-Reference "1" -- "1,*" Skill : has
+Reference "1" *-- "1,*" Skill : has
 
-Student "1" -r- "0,*" Note : "Writes   "
+User "1" -r- "0,*" Note : "Writes   "
 
 Note .. NoteType
+UserRole .. User
 
-Student "0,*" -- "1,*" Skill
-(Student, Skill) .. StudentSkill
+User "0,*" -- "1,*" Skill
+(User, Skill) .. StudentSkill
 
 @enduml

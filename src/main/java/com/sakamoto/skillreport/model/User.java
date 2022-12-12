@@ -1,6 +1,7 @@
 package com.sakamoto.skillreport.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -13,18 +14,24 @@ import java.util.Objects;
 @Setter
 @ToString
 @RequiredArgsConstructor
+@NoArgsConstructor
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NonNull
     private String name;
 
+    @NonNull
     @Column(unique = true)
+    @Email(message = "Email should be valid")
     private String email;
 
+    @NonNull
     private String password;
 
+    @NonNull
     @Enumerated(EnumType.STRING)
     private UserRole role;
 

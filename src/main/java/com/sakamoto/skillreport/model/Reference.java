@@ -26,6 +26,10 @@ public class Reference {
     @ToString.Exclude
     private List<Skill> skills;
 
+    @ManyToOne
+    @JoinColumn(name = "classroom_id", nullable = false)
+    private Classroom classroom;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

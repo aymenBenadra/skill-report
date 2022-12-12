@@ -25,12 +25,20 @@ public class Classroom {
     private String code;
 
     @ManyToOne
-    @JoinColumn(name = "instructor_id")
+    @JoinColumn(name = "instructor_id", nullable = false)
     private User instructor;
 
     @OneToMany(mappedBy = "classroom", fetch = FetchType.LAZY, cascade = CascadeType.MERGE, orphanRemoval = true)
     @ToString.Exclude
     private List<User> students;
+
+    @OneToMany(mappedBy = "classroom", fetch = FetchType.LAZY, cascade = CascadeType.MERGE, orphanRemoval = true)
+    @ToString.Exclude
+    private List<Reference> references;
+
+    @OneToMany(mappedBy = "classroom", fetch = FetchType.LAZY, cascade = CascadeType.MERGE, orphanRemoval = true)
+    @ToString.Exclude
+    private List<Note> notes;
 
     @Override
     public boolean equals(Object o) {

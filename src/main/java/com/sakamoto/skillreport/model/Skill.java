@@ -12,20 +12,23 @@ import java.util.Objects;
 @Getter
 @Setter
 @ToString
-@AllArgsConstructor
+@RequiredArgsConstructor
 @NoArgsConstructor
 public class Skill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NonNull
     private String name;
 
+    @NonNull
     @Column(unique = true)
     private String code;
 
+    @NonNull
     @ManyToOne
-    @JoinColumn(name = "reference_id")
+    @JoinColumn(name = "reference_id", nullable = false)
     private Reference reference;
 
     @OneToMany(mappedBy = "skill", fetch = FetchType.LAZY, cascade = CascadeType.MERGE, orphanRemoval = true)

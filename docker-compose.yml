@@ -1,9 +1,10 @@
 services:
   db:
     image: mysql
+    command: --max_connections=200
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: skill-report
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=skill-report
     ports:
       - 3307:3306
     volumes:
@@ -27,5 +28,24 @@ services:
       - PMA_PORT=3306
     depends_on:
       - db
+#  session-store:
+#    image: redis
+#    ports:
+#      - 6379:6379
+#    environment:
+#      - REDIS_PASSWORD=root
+#      - REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL,CONFIG
+#    volumes:
+#      - session-store-data:/data
+#  session-gui:
+#    image: redislabs/redisinsight
+#    ports:
+#      - 8001:8001
+#    volumes:
+#      - session-gui-data:/db
+#    depends_on:
+#      - session-store
 volumes:
   db_data:
+#  session-store-data:
+#  session-gui-data:
