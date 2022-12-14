@@ -16,6 +16,8 @@
         <spring.version>6.0.2</spring.version>
         <!-- Spring Data -->
         <spring-data.version>3.0.0</spring-data.version>
+        <!-- Spring Data Rest -->
+        <spring-data-rest.version>4.0.0</spring-data-rest.version>
         <!-- Spring Security -->
         <spring-security.version>6.0.0</spring-security.version>
     </properties>
@@ -47,6 +49,16 @@
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-jpa</artifactId>
             <version>${spring-data.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-rest-webmvc</artifactId>
+            <version>${spring-data-rest.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-rest-hal-browser</artifactId>
+            <version>3.3.9.RELEASE</version>
         </dependency>
         <!-- Spring Security -->
         <dependency>
@@ -124,6 +136,11 @@
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>2.14.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.modelmapper</groupId>
+            <artifactId>modelmapper</artifactId>
+            <version>3.1.0</version>
         </dependency>
         <!-- Logging -->
         <dependency>
