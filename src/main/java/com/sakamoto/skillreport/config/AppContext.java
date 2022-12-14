@@ -1,7 +1,9 @@
 package com.sakamoto.skillreport.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,8 +21,8 @@ import java.util.Properties;
 
 @Configuration
 @PropertySource("classpath:datasource.properties")
+@EnableJpaRepositories(basePackages = "com.sakamoto.skillreport.repositories")
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackages = "com.sakamoto.skillreport.repository")
 public class AppContext {
 
     @Bean(name = "dataSource", destroyMethod = "close")
@@ -37,6 +39,7 @@ public class AppContext {
         properties.put("hibernate.hbm2ddl.auto", "update");
         properties.put("hibernate.globally_quoted_identifiers", "true");
         properties.put("hibernate.connection.release_mode", "after_transaction");
+        properties.put("hibernate.enable_lazy_load_no_trans", "true");
         properties.put("jakarta.persistence.sharedCache.mode", "ENABLE_SELECTIVE");
 
         return properties;
@@ -65,5 +68,15 @@ public class AppContext {
     @Bean(name = "exceptionTranslation")
     public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
         return new PersistenceExceptionTranslationPostProcessor();
+    }
+
+    @Bean("modelMapper")
+    public ModelMapper modelMapper() {
+        return new ModelMapper();
+    }
+
+    @Bean("objectMapper")
+    public ObjectMapper objectMapper() {
+        return new ObjectMapper();
     }
 }
