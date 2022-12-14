@@ -1,4 +1,4 @@
-package com.sakamoto.skillreport.model;
+package com.sakamoto.skillreport.models;
 
 public enum UserRole {
     ROLE_INSTRUCTOR,

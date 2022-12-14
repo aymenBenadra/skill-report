@@ -1,4 +1,4 @@
-package com.sakamoto.skillreport.model;
+package com.sakamoto.skillreport.models;
 
 import jakarta.persistence.*;
 import lombok.*;
